@@ -1,205 +1,390 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
-<title>"Perlito" Perl5 Compiler + CodeMirror</title>
-<link rel="stylesheet" href="css/docs.css" type="text/css">
-<link rel="stylesheet" href="css/codemirror.css" type="text/css">
-<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript">
-</script>
-<script src="js/codemirror.js" type="text/javascript">
-</script>
-<script src="js/perl.js" type="text/javascript">
-</script>
-<style type="text/css">
-.CodeMirror { 
-font-family: Inconsolata;
-font-size: 20px;
-width:100%;
-}
-.table table-condensed {
-width:100%;
-height:2em;
-padding: 1px;
-border: 0px;
-}
-</style>
+  <head>
+    <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+      <title>Perl5 under pressure</title>
+      <link rel="stylesheet" href="css/docs.css" type="text/css">
+	<link rel="stylesheet" href="css/codemirror.css" type="text/css">
+	  <!-- Bootstrap core CSS -->
+	  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	    <link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+	      <!-- Documentation extras -->
+	      <link href="assets/css/docs.css" rel="stylesheet">
+		<link href="assets/css/pygments-manni.css" rel="stylesheet">
+		  <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+		    <script src="js/bootstrap.min.js" type="text/javascript">
+		    </script>
+		    <script src="js/codemirror.js" type="text/javascript">
+		    </script>
+		    <script src="js/perl.js" type="text/javascript">
+		    </script>
+		    <style type="text/css">.CodeMirror { 
+		      font-family: Inconsolata;
+		      font-size: 20px;
+		      width:100%;
+		      }
+		      .table table-condensed {
+		      width:100%;
+		      height:2em;
+		      padding: 1px;
+		      border: 0px;
+			}</style>
+			<script type="text/javascript" src="js/perlito5.js">
+			</script>
+		      </head>
+		      <body>
+			<div class="navbar navbar-default navbar-static-top navbar-fixed-top" role="navigation">
+			  <div class="container">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar">
+				</span>
+				<span class="icon-bar">
+				</span>
+				<span class="icon-bar">
+				</span>
+			      </button>
+			      <a class="navbar-brand" href="#">Perl5 under pressure</a>
+			    </div>
+			    <div class="navbar-collapse collapse">
+			      <ul class="nav navbar-nav">
+				<li class="active">
+				  <a href="#">Home</a>
+				</li>
+				<li>
+				  <a href="#about">About</a>
+				</li>
+				<li>
+				  <a href="#contact">Contact</a>
+				</li>
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown">plain-perl5<b class="caret">
+				  </b>
+				</a>
+				<ul class="dropdown-menu">
+				  <li class="active">
+				    <a href="#" >Plain old perl</a>
+				  </li>
+				<li class="disabled">
+				    <a href="#">modern perl / Moose  (comming soon)</a>
+				  </li>
+				  <li class="disabled">
+				    <a href="#">Perl5i (comming soon)</a>
+				  </li>
+				  <li class="disabled">
+				    <a href="#">perl11 (p2) (comming soon)</a>
+				  </li>
+				  <li class="disabled">
+				    <a href="#">P5-Mop aka perl 5.22 (comming soon)</a>
+				  </li>
+				</ul>
+			      </li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			      <li>
+				<a style="font-size:28px; font-style:bold" id="timer" onclick="game_startTimer()">0:00</a>
+			      </li>
+			      <li>
+				<a href="#socialstuff">
+				  <span class="glyphicon glyphicon-share">
+				  </span>
+				</a>
+			      </li>
+			      <li>
+				<a href="#donate" >
+				  <span class"glyphicon glyphicon-usd">
+				  </span>
+				  <span class="glyphicon glyphicon-star">
+				  </span>
+				</a>
+			      </li>
+			    </ul>
+			  </div>
+			  <!--/.nav-collapse -->
+			  </div>
+			</div>
+			<div id="body" class="container">
+			  <h1 id="level"   class="page-header">Level1</h1>
+			    <div id="mission"  class="page-header">
+			    Answer the Questions in Perlcode. When you are finish, click on "Go". The Software checks your answer and show you the next Question. But keep the ticking clock in mind.
+			  </div>
+			  <div id="message" class="alert alert-info alert-dismissable" style="display:none">
+			    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			    <strong>Warning! </strong>This Software is beta but somehow cool!</div>
+			    <form>
+			      <div class="row">
+				<div class="col-lg-12">
+				  <div class="panel panel-primary">
+				    <div class="panel-body">
+				      <textarea class="form-control" id="sourceheader" style="display:none"></textarea>
+					      <textarea class="form-control" id="source" name="source" cols="100" rows="10"></textarea>
+						</div>
+					      </div>
+					    </div>
+					    <div class="row">
+					      <div class="col-lg-3 coll-lg-offset-1">
+						<input type="button" class="btn btn-primary btn-lg" id='go'   value="Go" onclick="game_check()">
+						<input type="button" class="btn btn-primary btn-lg btn-success" id='next' style="display:none" value="Next" onclick="game_next()">
+						<input type="button" class="btn btn-lg game" value="Reset" id='reset' onclick="game_reset()">
+						  </div>
+						  <div class="col-lg-7">
+						   <input type="button" class="btn game" value="Get a hint" onclick="game_hint()">
+						   <input type="button" class="btn game" value="Resolve" onclick="game_resolve()">
+						   <input type="button" class="btn game" value="Perl Critic" onclick="document.getElementById('print-result2').innerHTML = 'Not implemented yet. For more informations look at <a href=\'http://perlcritic.com/\'>http://perlcritic.com/</a> and <a href=\'https://metacpan.org/module/Perl::Critic\'>https://metacpan.org/module/Perl::Critic</a>'">
+						   <input type="button" class="btn debug" style="display:none" value="Export Test" onclick="game_export()">
+						   <input type="button" class="btn debug" id="debugon" value="ShowDebugElements" onclick="$('#debugon').hide();$('#debugoff').show();$('#debug-log').show(); $('#debug-log').show();$('#sourceheader').show();$('#testcase').show();">
+						   <input type="button" class="btn debug" id="debugoff" style="display:none" value="HideDebugElements" onclick="$('#debugoff').hide();$('#debugon').show(); $('#debug-log').hide();$('#sourceheader').hide();$('#testcase').hide();">
+						     </div>
+						  </div>
+						      <div class="row" style="margin-top:25px;">
+							<div class="col-xs-12">
+							  <div class="panel panel-primary">
+							    <div class="panel-heading">Output</div>
+							    <div class="panel-body">
+							      <table class="table" id="print-result2">
+							      </table>
+							  </div>
+							</div>
+						      </div>
+						      <div id="debug-log" style="display:none" >
+							<textarea class="form-control" id="testcase" name="testcase" cols="120" rows="5">
+							</textarea>
+							    <br>
+							    </form>
+							    <p>Compiler log:</p>
+							    <textarea class="form-control" id="log-result" readonly="true" cols="120" rows="8">
+							    </textarea>
+							    <br>
+							      <p>Compiled to Javascript:</p>
+							      <textarea class="form-control" id="js-result" readonly="true" cols="120" rows="8">
+							      </textarea>
+							      <br>
+								<p>Output:</p>
+								<textarea class="form-control" id="print-result" readonly="true" cols="120" rows="8">
+								</textarea>
+								<br>
+								</div>
+								<br>
+								</div>
+							      </div>
+							    </div>
+							    
+							    <script type="text/javascript">
+							       var editor = CodeMirror.fromTextArea(document.getElementById("source"), {
+							        firstLineNumber: 1,
+								lineNumbers: true
+								  });
+							    
+								    
+								    function execute() {
+								    editor.save();          
+								    p5pkg.CORE.print = function(List__) {
+								    var i;
+								    for (i = 0; i< List__.length; i++) {
+								    var line = p5str(List__[i]);
+								    document.getElementById('print-result').value += line;
+								      if (line != '\n') document.getElementById('print-result2').innerHTML += '<tr><td>'+line+'</td></tr>';
+								      }
+								      return true;
+								      };
+								      p5pkg.CORE.warn = function(List__) {
+								      var i;
+								      List__.push("\n");
+								      for (i = 0; i< List__.length; i++) {
+								      var line = p5str(List__[i]);
+									if (line != '\n') document.getElementById('print-result2').innerHTML += '<tr class="danger"><td>'+line+'</td></tr>';
+									document.getElementById('log-result').value += line;
+									}
+									return true;
+									};
+									p5pkg["main"]["v_^O"] = "browser";
+									p5pkg["main"]["Hash_INC"]["Perlito5/strict.pm"] = "Perlito5/strict.pm";
+									p5pkg["main"]["Hash_INC"]["Perlito5/warnings.pm"] = "Perlito5/warnings.pm";
+									p5pkg["main"]["Hash_INC"]["Perlito5/warnings.pm"] = "Perlito5/warnings.pm";
+									
+									var source  = document.getElementById('sourceheader').value   + "\n";
+									source += document.getElementById('source').value   + "\n";
+									source += document.getElementById('testcase').value + "\n";
+									var pos = 0;
+									var ast;
+									var match;
+									document.getElementById('log-result').value   = "";
+									document.getElementById('js-result').value    = "";
+									document.getElementById('print-result').value = "";
+									document.getElementById('print-result2').innerHTML  = "";
+									try {
+									// compile
+									document.getElementById('log-result').value += "Compiling.\n";
+									var start = new Date().getTime();
+									var js_source = p5pkg["Perlito5"].compile_p5_to_js([source]);
+									var end = new Date().getTime();
+									var time = end - start;
+									document.getElementById('log-result').value +=  "Compilation time: " + time + "ms\n";
+									document.getElementById('js-result').value  += js_source + ";\n";
+									
+									// run
+									start = new Date().getTime();
+									eval(js_source);
+									end = new Date().getTime();
+									time = end - start;
+									document.getElementById('log-result').value += "Running time: " + time + "ms\n";
+									p5pkg.CORE.print(["\nDone.\n"]);
+									game_success();
+									}
+									catch(err) {
+									var errstring = err + "";
+									if ( errstring.match('Died: 1') ) return 0;
+									document.getElementById('print-result2').innerHTML += '<tr class="danger"><td>CompilerError. Check the Syntax.<br/>Did you use a unknown Command?  </td></tr>';
+									document.getElementById('log-result').value += "Error:\n";
+									document.getElementById('log-result').value += err + "\n";
+									document.getElementById('log-result').value += "Compilation aborted.\n";
+									}
+									  }</script>
+									  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+									  <script src="js/jquery.js">
+									  </script>
+									  <!-- Include all compiled plugins (below), or include individual files as needed -->
+									  <script src="js/bootstrap.min.js">
+									  </script>
+									  <script type="text/javascript">
+									var game_timer = { 'start' : '' , 'current' : 0, 'running' : false };
+									      
+									function game_updateTimer() {
+										  game_timer['current'] += 1;
+										  var timer = game_timer['current'];
+										  var minute = Math.floor(timer / 60);
+										  var second = Math.floor(timer % 60).toFixed(0);
+										    if  ( second.length <  2 ) second = '0' + second;
+										  $('#timer').text( minute + ':' + second);
+										  //.pad(2, "0"));
+									      }
+									      
+									 function game_startTimer() {
+										  game_timer['running'] = true;
+										  game_timer['start'] = new Date().getTime();
+										  setTimeout(game_tick,1000);
+									    }
 
-<script type="text/javascript" src="js/perlito5.js">
-</script>
-</head>
-<body>
-<div class="navbar navbar-default navbar-static-top" role="navigation">
- <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Perl5 under pressure</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Plain old perl</a></li>
-                <li><a href="#">Perl5i</a></li>
-                <li><a href="#">Moose</a></li>
-                <li><a href="#">Perl5-Mop (Redux)</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#socialstuff"><img class=".glyphicon-share"></a></li>
-            <li><a href="#donate" ><img class".glyphicon-usd"/></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-</div>
-<div class="container"> </div>
-<div class="container"> <p id="mission">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor. Pellentesque auctor nisi id magna consequat sagittis. Curabitur dapibus enim sit amet elit pharetra tincidunt feugiat nisl imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</p>
-<form>
-<div class="row">
-<div class="col-lg-11">
-<div class="panel panel-primary">
-   <div class="panel-body">
-<textarea class="form-control" id="source" name="source" cols="100" rows="10">
-# returnes the doubled value of an integer.
-#  @param one int number
-#  @return int or undef
-sub doubleInteger {
-		
+									function game_stopTimer() {
+									      game_timer['running'] = false;
+									      game_timer['start']  += (new Date().getTime() - game_timer['start']);
+									      game_updateTimer();
+									    }
 
+									    function game_tick() {
+										if ( game_timer['running'] == true ) {
+										    game_updateTimer();
+										    setTimeout(game_tick,1000);
+										}
+									    }
+									      
+									      var current_mission = 0;
+									      var missions = [ {
+										   'name' : 'Instruction',
+										   'description' :  'This field you will see the mission details and the test results.If the test passes the clock stops until you click on next.\nIf you klick on "Go" the test will start. Klick on "Get a hint" to get hint :-). ',
+										   'sourceheader' : 'use strict;\nuse warnings;',
+										   'template' : '# In this field you will see the source code \n#you have to change to complete the mission.\nsub yaph {\n   my $name = shift;\n\n}',
+										   'hint' : 'A hint to  help you if you are unsure about your solution.',
+										   'solution' : '# this is the solution of mission.\nsub yaph {\n   my $name = shift;\n   say "Yet another $name hacker";\n   return 1;\n}',
+										   'testcase' : 'yaph("Perl5")',
+										   'startclock' : false
+									      },
+									      { 
+										'name' : 'Level1',
+										'description' : 'Replace the function with your own version. If the first function parameter is a integer, double it and then return it. Else return undef. \nYou could use regex or a function from Math::BigInt that is allready exported',
+										'sourceheader' : 'my $test_count = 0;\n sub ok {\n my ( $boolean, $errorMessage, $successMessage ) = @_;\n $test_count++;\nif ( $boolean == 1 ){\n say "Test $test_count Successfull. $successMessage";\n } else {\n warn "Error on Test $test_count. $errorMessage"; \n die 1;\n };\n };\n sub like {\n my $returnValue = shift;\n my $condition = shift;\n if ( $returnValue == $condition ){\n ok(1, @_);\n } else {\n ok(0, @_);\n };\n };\n sub Math::BigInt::looks_like_number {\n local $_ = shift;\n\n #th::BigInt::looks_like_number checks from perlfaq4\n return 0 if !defined($_);\n return 1 if (/^[+-]?[0-9]+$/); # is a +/- integer\n return 1 if (/^([+-]?)(?=[0-9]|\\.[0-9])[0-9]*(\\.[0-9]*)?([Ee]([+-]?[0-9]+))?$/); # a C float\n return 1 if ($] >= 5.008 and /^(Inf(inity)?|NaN)$/i) or ($] >= 5.006001 and /^Inf$/i);\n\n 0;\n}\n \n sub Math::BigInt::is_int {\n return 0 if !(Math::BigInt::looks_like_number($_[0]));\n return $_[0] =~ m/^[+-]?\\d+$/;\n }\n \n sub is_int { Math::BigInt::is_int(@_)}\n ',
+										'template' : '# Math::BigInt; is loaded\nsub doubleInteger {\n      my $i = shift;\n    # if $i is integer double it and return it. if not its not an integer then return undef\n      return $i;\n};',
+										'hint' : 'https://metacpan.org/module/Math::BigInt',
+										'solution': '# returnes the doubled value of an integer.\n#  @param one int number\n#  @return int or undef\nsub doubleInteger {\n	my $i = shift;\nif ( is_int($i) ){\n	return $i*2;    }else {\n        return undef\n    };\n}',
+										'testcase': 'like( doubleInteger(1), 2, "Parameter was \'1\' expected return value \'2\' ", "Parameter \'1\' and return value \'2\'");\nlike( doubleInteger(\'a\'), \'b\', "Parameter was \'a\' expected return value undef ", "Parameter \'a\' and return value undef");\nlike( doubleInteger(100), 200, "Parameter was \'100\' expected return value \'200\' ", "Parameter \'100\' and return value \'200\'");\nlike( doubleInteger(0.001),undef, "Parameter was \'0.001\' expected return value undef","Parameter \'0.001\' and return value undef");\nlike( doubleInteger([1,2]),undef, "Parameter was [1,2] expected return value undef ", "Parameter [1,2] and return value undef");\nlike( doubleInteger("1a"), undef, "Parameter was \'1a\' expected return value undef ", "Parameter \'1a\' and return value undef");\nlike( doubleInteger(65e3), 13e4, "Parameter was 65e3 (65000) expected return value 13e4 (130000) ", " Parameter was 65e3 (65000) return value 13e4 (130000)");',
+										'startclock' : true
+										}									    
+									      ];
+									      //document.getElementById('source').value  = missions[current_mission]['template'];
+									      
+									     
+									      
+									      function game_start(mission) {
+										  if ( mission + 1 > missions.length) mission = 0;
+										  current_mission = mission;
+									          editor.setValue(missions[mission]['template']);
+										  document.getElementById('level').innerHTML = missions[mission]['name'];
+										  document.getElementById('print-result2').innerHTML = '<tr><td>'+  missions[mission]['description']  +'</td></tr>'
+										  document.getElementById('sourceheader').value = missions[mission]['sourceheader'];
+										  document.getElementById('testcase').value  = missions[mission]['testcase'];
+										  if ( missions[mission]['startclock'] === true  ) game_startTimer();
+										  $('#go').show();
+										  $('.game').attr("disabled",false);
+										  $('#next').hide();
+										  //editor.readOnly(0);
+									      };
+									      
+									      function game_check() {
+										execute();
+									      };
+									      
+									      function game_next(){
+									        var mission = current_mission++;
+										game_start(current_mission);
+									      
+									      };
+									      function game_reset () {
+										  game_start(current_mission);
+									      };
+									      
+									      function game_success(){
+										  game_stopTimer();
+										  $('#go').hide();
+										  $('.game').attr("disabled",true);
+										  $('#next').show();
+									      };
+									      
+									      function game_hint () {
+										  alert(missions[current_mission]['hint']);
+									      
+									      };
+									      
+									      function game_resolve(){
+											  editor.setValue(missions[current_mission]['solution']);
+									      };
+									      
+									      function game_export(){
+										  var name = document.getElementById('level').value;
+										      name = normalize_string( prompt('Name:', name) );
+										  var description = document.getElementById('mission').value;
+										  description = normalize_string(  prompt('Description:', description ) );
+										  var hint = normalize_string( prompt('Hint:') );
+										  var sourceheader = normalize_string( document.getElementById('sourceheader').value );
+										  var template = normalize_string( document.getElementById('source').value );
+										  var testcase = normalize_string( document.getElementById('testcase').value );
 
-
-
-
-}
-
-</textarea>
-</div>
-</div>
-
-<div class="row" style="margin-top:25px;">
-<div class="col-lg-1">
-<input type="button" class="btn btn-primary btn-lg" value="Go" onclick="execute()">
-</div>
-<div class="col-lg-11">
-<div class="panel panel-primary">
-   <div class="panel-heading">Output</div>
-   <div class="panel-body">
-	<table class="table table-condensed" id="print-result2"></table>
-      </textarea>
-   </div>
-</div>
-</div>
-<div class="row" id="debug-log" >
-<textarea class="form-control" id="testcase" name="testcase" cols="120" rows="5">
-if ( doubleInteger(1) == 2){say "Test1: ok" }else{warn "Fehler Test1"};
-if ( not defined(doubleInteger(a))){say "Test2: ok" }else{say "Fehler Test2"};
-if ( doubleInteger(100) == 200 ){say "Test3: ok" }else{say "Fehler Test3"};
-if ( not defined( doubleInteger(0.00001)) ){say "Test4: ok" }else{say "Fehler Test4"};
-if ( not defined( doubleInteger([1,2]) )){say "Test5: ok" }else{say "Fehler Test5"};
-if ( not defined( doubleInteger("1a")  )){say "Test6: ok" }else{say "Fehler Test6"};
-</textarea>
-<br></form>
-<p>Compiler log:</p>
-<textarea class="form-control" id="log-result" readonly="true" cols="120" rows="8">
-</textarea>
-<br>
-<p>Compiled to Javascript:</p>
-<textarea class="form-control" id="js-result" readonly="true" cols="120" rows="8">
-</textarea>
-<br>
-<p>Output:</p>
-<textarea class="form-control" id="print-result" readonly="true" cols="120" rows="8">
-</textarea>
-<br></div>
-<br>
-</div>
-</div>
-<script type="text/javascript">
-      var editor = CodeMirror.fromTextArea(document.getElementById("source"), {
-        lineNumbers: true
-      });
-</script><script type="text/javascript">
-
-         function execute() {
-            editor.save();          
-            p5pkg.CORE.print = function(List__) {
-                var i;
-                for (i = 0; i < List__.length; i++) {
-			    var line = p5str(List__[i]);
-	document.getElementById('print-result').value += line
-	if (line != '\n') document.getElementById('print-result2').innerHTML += '<tr><td>'+line+'</td></tr>';
-                }
-                return true;
-            };
-            p5pkg.CORE.warn = function(List__) {
-                var i;
-                List__.push("\n");
-                for (i = 0; i < List__.length; i++) {
-			    var line = p5str(List__[i]);
-		if (line != '\n') document.getElementById('print-result2').innerHTML += '<tr class="danger"><td>'+line+'</td></tr>';
-                            document.getElementById('log-result').value += line;
-                }
-                return true;
-            };
-            p5pkg["main"]["v_^O"] = "browser";
-            p5pkg["main"]["Hash_INC"]["Perlito5/strict.pm"] = "Perlito5/strict.pm";
-            p5pkg["main"]["Hash_INC"]["Perlito5/warnings.pm"] = "Perlito5/warnings.pm";
-
-            var source  = document.getElementById('source').value   + "\n";
-                source += document.getElementById('testcase').value + "\n";
-            var pos = 0;
-            var ast;
-            var match;
-                        document.getElementById('log-result').value   = "";
-                        document.getElementById('js-result').value    = "";
-                    document.getElementById('print-result').value = "";
-                    document.getElementById('print-result2').innerHTML  = "";
-		i// document.getElementById('debug-log').style.display = 'none'
-            try {
-                // compile
-                            document.getElementById('log-result').value += "Compiling.\n";
-                var start = new Date().getTime();
-                var js_source = p5pkg["Perlito5"].compile_p5_to_js([source]);
-                var end = new Date().getTime();
-                var time = end - start;
-                            document.getElementById('log-result').value +=  "Compilation time: " + time + "ms\n";
-                    document.getElementById('js-result').value  += js_source + ";\n";
-
-                // run
-                start = new Date().getTime();
-                        eval(js_source);
-                end = new Date().getTime();
-                time = end - start;
-                            document.getElementById('log-result').value += "Running time: " + time + "ms\n";
-                p5pkg.CORE.print(["\nDone.\n"]);
-            }
-            catch(err) {
-		document.getElementById('debug-log').style.display = '';
-                document.getElementById('log-result').value += "Error:\n";
-                document.getElementById('log-result').value += err + "\n";
-                document.getElementById('log-result').value += "Compilation aborted.\n";
-            }
-                }
-</script>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://code.jquery.com/js/bootstrap.min.js"></script>
-</body>
-</html>
+										  var game_data = "{"
+										      +"'name' : '" + name
+										      +"','description' :'" + description
+										      +"','sourceheader' :'" + sourceheader
+										      +"','template' : '" + template
+										      +"','hint' : '" + hint
+										      +"','testcase' : '" +testcase
+										  +"}";      
+										 
+									      document.getElementById('print-result2').innerHTML = game_data;
+									      };
+									      
+									      function normalize_string (s) {
+										      s = s.replace(/\r/g,'');
+										      s = s.replace(/\\/g,'\\\\');
+										      s = s.replace(/\n/g,'\\n');
+										      s = s.replace(/'/g,'\\\'');
+										  return s;
+									      };
+									      
+									      
+								
+									      
+									      game_start(0);
+									      
+									     </script>
+									  </body>
+									
+								      </html>
+								      
